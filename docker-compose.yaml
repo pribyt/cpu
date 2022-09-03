@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    networks:
+      - nginx_network
+      - webapp_network
+
+   webapp1:
+    build:
+      dockerfile: Dockerfile
+    container_name: mywebapp1
+    expose:
+            - "1051"
+    networks:
+      - webapp_network
+
+   webapp2:
+    build:
+      dockerfile: Dockerfile
+    container_name: mywebapp2
+    expose:
+            - "1051"
+    networks:
+      - webapp_network
+
+networks:
+  nginx_network:
+    external: true
