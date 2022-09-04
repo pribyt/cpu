@@ -16,7 +16,7 @@ services:
 
   mywebapp1:
     build:
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     expose:
       - "1501"
     container_name: mywebapp1
@@ -24,7 +24,7 @@ services:
       - webapp_network
   mywebapp2:
     build:
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     container_name: mywebapp2  
     expose:
       - "1501"
