@@ -15,16 +15,14 @@ services:
       - mywebapp2
 
   mywebapp1:
-    build:
-      dockerfile: ./Dockerfile
+    image: "pribyt/cpu:latest"
+    container_name: mywebapp1
     expose:
       - "1501"
-    container_name: mywebapp1
     networks:
       - webapp_network
   mywebapp2:
-    build:
-      dockerfile: ./Dockerfile
+    image: "pribyt/cpu:latest"
     container_name: mywebapp2  
     expose:
       - "1501"
