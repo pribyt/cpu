@@ -45,12 +45,6 @@ jobs:
       
     - name: Test2
       run: curl -s --retry 10 --retry-connrefused http://localhost/
-      
-    - name: Check http status code of production site
-      uses: lakuapik/gh-actions-http-status@v1
-      with:
-        sites: '["http://localhost/"]'
-        expected: '[200]'
 
     - name: Stop containers
       if: always()
