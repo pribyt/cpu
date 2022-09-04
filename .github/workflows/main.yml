@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  docker:
+    timeout-minutes: 3
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Start containers
+      run: docker-compose -f "docker-compose.yml" up -d --build
+
+    - name: Curl
+      run: curl http://localhost/
+      
+    - name: Test
+      run: appropriate/curl -s --retry 10 --retry-connrefused http://localhost/
+      
+    - name: Check http status code of production site
+      uses: lakuapik/gh-actions-http-status@v1
+      with:
+        sites: '["http://localhost/"]'
+        expected: '[301, 200]'
+
+    - name: Stop containers
+      if: always()
+      run: docker-compose -f "docker-compose.yml" down
