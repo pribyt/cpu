@@ -40,17 +40,17 @@ jobs:
     - name: Start containers
       run: docker-compose -f "docker-compose.yml" up -d --build
 
-    - name: Curl
+    - name: Test1
       run: curl http://localhost/
       
-    - name: Test
+    - name: Test2
       run: curl -s --retry 10 --retry-connrefused http://localhost/
       
     - name: Check http status code of production site
       uses: lakuapik/gh-actions-http-status@v1
       with:
         sites: '["http://localhost/"]'
-        expected: '[301, 200]'
+        expected: '[200]'
 
     - name: Stop containers
       if: always()
