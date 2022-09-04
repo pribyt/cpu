@@ -32,6 +32,9 @@ jobs:
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
+      
+    - name: Сreate docker network
+      run: docker network create nginx_network
 
     - name: Start containers
       run: docker-compose -f "docker-compose.yml" up -d --build
