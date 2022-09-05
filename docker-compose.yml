@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 
 services:
   nginx:
@@ -15,13 +15,17 @@ services:
       - mywebapp2
 
   mywebapp1:
-    image: "pribyt/cpu:latest"
+    build:
+      context: .
+    platform: "linux/amd64"
     container_name: mywebapp1
     expose:
       - "1501"
     networks:
       - webapp_network
+      
   mywebapp2:
+    platform: "linux/amd64"
     image: "pribyt/cpu:latest"
     container_name: mywebapp2  
     expose:
